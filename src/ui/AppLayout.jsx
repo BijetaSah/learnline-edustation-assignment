@@ -4,10 +4,14 @@ import FilterCategory from "../features/products/FilterCategory";
 import SearchBar from "../features/products/SearchBar";
 import ClearButton from "../features/products/ClearButton";
 import Products from "../features/products/Products";
+import Navbar from "./Navbar";
 
 function AppLayout() {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [searchQuerry, setSearchQuerry] = useState("");
+
+  // cart open and close state for mobile and small screen
+  const [cartOpen, setCartOpen] = useState(false);
 
   // handler function for search querry
   function handleSearchQuerry(value) {
@@ -25,6 +29,11 @@ function AppLayout() {
     setSearchQuerry("");
   }
 
+  // handler funcition to open and close cart
+  function handleCartView() {
+    setCartOpen((prev) => !prev);
+  }
+
   const filteredProducts = products
     .filter((product) =>
       selectedCategory === "All" ? true : product.category === selectedCategory
@@ -32,18 +41,21 @@ function AppLayout() {
     .filter((p) => p.name.toLowerCase().includes(searchQuerry.toLowerCase()));
 
   return (
-    <main>
-      <FilterCategory
-        selectedCategory={selectedCategory}
-        onSelectCategory={handleSelectCategory}
-      />
-      <SearchBar
-        searchQuerry={searchQuerry}
-        onSearchChange={handleSearchQuerry}
-      />
-      <ClearButton onClearFilter={handleClearFilter} />
-      <Products products={filteredProducts} />
-    </main>
+    <>
+      <Navbar onToggleCartView={handleCartView} />
+      <main className="bg-stone-100 py-10 w-full h-dvh">
+        <FilterCategory
+          selectedCategory={selectedCategory}
+          onSelectCategory={handleSelectCategory}
+        />
+        <SearchBar
+          searchQuerry={searchQuerry}
+          onSearchChange={handleSearchQuerry}
+        />
+        <ClearButton onClearFilter={handleClearFilter} />
+        <Products products={filteredProducts} />
+      </main>
+    </>
   );
 }
 
