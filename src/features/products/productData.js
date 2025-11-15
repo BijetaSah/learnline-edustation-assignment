@@ -46,7 +46,7 @@ export const products = [
     name: "Smartwatch Series 5",
     category: "Electronics",
     price: 250,
-    image: "/products/smart-watch.jpg",
+    image: "/products/smart-watch.webp",
   },
   {
     id: 8,
