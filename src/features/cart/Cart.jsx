@@ -24,14 +24,22 @@ function Cart({ onCartTogggleView }) {
       ></div>
 
       <div className="fixed top-0 right-0 w-80 md:w-100 bg-white h-full shadow-xl pt-5 overflow-y-auto z-50 flex   flex-col gap-5">
-        {/* close button */}
-        <button
-          onClick={onCartTogggleView}
-          className="text-xl cursor-pointer px-5"
-        >
-          <IoClose />
-        </button>
+        <div className="flex justify-between items-center ">
+          {/* close button */}
+          <button
+            onClick={onCartTogggleView}
+            className="text-xl cursor-pointer px-5"
+          >
+            <IoClose />
+          </button>
 
+          <button
+            className="mr-5 font-semibold bg-blue-700 text-white  px-4 py-2 rounded-xl cursor-pointer"
+            onClick={() => dispatch(clearCart())}
+          >
+            Clear cart
+          </button>
+        </div>
         {/* cart content */}
         <div className="px-5">
           {cart.length === 0 ? (
