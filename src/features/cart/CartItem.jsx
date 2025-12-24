@@ -11,11 +11,11 @@ import {
 
 function CartItem({ cartItem }) {
   const dispatch = useDispatch();
-  const { name, totalPrice, quantity, id } = cartItem;
+  const { title, totalPrice, quantity, id } = cartItem;
   return (
     <div className="flex flex-col">
       <div className="flex gap-2 items-center justify-between">
-        <h4 className="">{name}</h4>
+        <h4 className="">{title}</h4>
         <p className="font-bold ">{formatCurrency(totalPrice)}</p>
 
         <div className="flex items-center gap-4">

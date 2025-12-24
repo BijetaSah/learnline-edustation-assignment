@@ -12,6 +12,7 @@ function Cart({ onCartTogggleView }) {
   const totalCartPrice = useSelector(getTotalPrice);
 
   function handleOrderNow() {
+    alert("products ordered successfully");
     dispatch(clearCart());
     onCartTogggleView();
   }

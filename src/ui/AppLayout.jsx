@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { products } from "../features/products/productData";
+import { useState, useEffect } from "react";
+
 import FilterCategory from "../features/products/FilterCategory";
 import SearchBar from "../features/products/SearchBar";
 import ClearButton from "../features/products/ClearButton";
@@ -8,8 +8,25 @@ import Navbar from "./Navbar";
 import Cart from "../features/cart/Cart";
 
 function AppLayout() {
-  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [products, setProducts] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("all");
   const [searchQuerry, setSearchQuerry] = useState("");
+
+  // data fetching
+  useEffect(function () {
+    async function getProducts() {
+      try {
+        const res = await fetch("https://fakestoreapi.com/products");
+        if (!res.ok) throw new Error("Data could not be fetched");
+        const data = await res.json();
+        setProducts(data);
+        console.log(data);
+      } catch (err) {
+        console.error(err.message);
+      }
+    }
+    getProducts();
+  }, []);
 
   // cart open and close state for mobile and small screen
   const [cartOpen, setCartOpen] = useState(false);
@@ -21,12 +38,12 @@ function AppLayout() {
 
   // handler function for category
   function handleSelectCategory(category) {
-    setSelectedCategory((prev) => (prev === category ? "All" : category));
+    setSelectedCategory((prev) => (prev === category ? "all" : category));
   }
 
   // handler function to clearfilter
   function handleClearFilter() {
-    setSelectedCategory("All");
+    setSelectedCategory("all");
     setSearchQuerry("");
   }
 
@@ -37,9 +54,9 @@ function AppLayout() {
 
   const filteredProducts = products
     .filter((product) =>
-      selectedCategory === "All" ? true : product.category === selectedCategory
+      selectedCategory === "all" ? true : product.category === selectedCategory
     )
-    .filter((p) => p.name.toLowerCase().includes(searchQuerry.toLowerCase()));
+    .filter((p) => p.title.toLowerCase().includes(searchQuerry.toLowerCase()));
 
   return (
     <>

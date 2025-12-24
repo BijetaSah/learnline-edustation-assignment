@@ -4,7 +4,7 @@ import { addItem, getItemIsInCart } from "../cart/cartSlice";
 
 function ProductItem({ product, onToggleCartView }) {
   const dispatch = useDispatch();
-  const { image, name, price, category, id } = product;
+  const { image, title, price, category, id } = product;
   const isInCart = useSelector(getItemIsInCart(id));
 
   function handleAddToCart() {
@@ -13,7 +13,7 @@ function ProductItem({ product, onToggleCartView }) {
       id,
       image,
       quantity,
-      name,
+      title,
       price,
       category,
       totalPrice: price * quantity,
@@ -26,7 +26,7 @@ function ProductItem({ product, onToggleCartView }) {
     <div className="shadow-lg rounded-xl flex flex-col bg-white hover:translate-y-1 trasnition-translate duration-200 ">
       <img
         src={image}
-        alt={`Image of ${name}`}
+        alt={`Image of ${title}`}
         className="w-40 h-40 self-center py-2"
       />
 

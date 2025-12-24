@@ -1,5 +1,10 @@
 function FilterCategory({ selectedCategory, onSelectCategory }) {
-  const categories = ["All", "Electronics", "Books", "Clothing"];
+  const categories = [
+    "all",
+    "electronics",
+    "men's clothing",
+    "women's clothing",
+  ];
 
   return (
     <div className="flex md:gap-4 justify-center mb-5 gap-1">
@@ -7,7 +12,7 @@ function FilterCategory({ selectedCategory, onSelectCategory }) {
         <button
           key={i}
           onClick={() => onSelectCategory(cat)}
-          className={` lg:px-6 px-2 py-1 rounded-full font-semibold transition-colors duration-300 ${
+          className={` lg:px-6 px-2 py-1 rounded-full font-semibold capitalize transition-colors duration-300 ${
             cat === selectedCategory
               ? "bg-indigo-700 text-white "
               : "bg-stone-100"
